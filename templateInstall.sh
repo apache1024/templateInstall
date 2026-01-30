@@ -110,6 +110,14 @@ helpFlag(){
 
 arg_processing(){
     echo "Аргумент $1"
+    if [[ "${!i}" =~ ^[\-]{1,2}([A-Za-z]+) ]];
+        then
+            temp_arg="${BASH_REMATCH[1]}"
+            case "$temp_arg" in
+                n|name) echo "Key is name";;
+                *) echo "что-то иное" ;;
+            esac
+    fi
 }
 
 flag_analiz() {
