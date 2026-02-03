@@ -19,18 +19,112 @@ set -e # Прекратить выполнение при ошибке
 set -u # Прекратить при использовании необъявленных переменных
 
 
+arr_var=(''   #name
+        ''   #link
+        ''   #icon
+        ''   #help
+        ''   #catalog
+        '')   #path)
+
+long_key=(name
+            link
+            icon
+            help
+            catalog
+            path
+)
+short_key=(n
+            l
+            i
+            h
+            c
+            p
+)
+regex_value=('^[a-z0-9]{4,25}[\.][a-z0-9]{2,5}$'
+            '^[A-Za-zА-Яа-яёЁ0-9\_]{4,25}$'
+            ''
+            ''
+            ''
+            '^((\/|\.\/)|([a-zA-Z0-9_.-]+\/))?([a-zA-Z0-9_.-]+\/)*[a-zA-Z0-9_.-]+(\.[a-zA-Z0-9]+)?$')
+value_error_text=("значение аргумента \033[1m--name:\033[0m
+   имя мне менее 4-х знаков и не более 25-ти,\n\t
+   обязательное расширение после точки не менее двух
+   знаков и не более 5-ти,\n\t только буквы в нижнем
+   регистре, цифры от 0-9 не более одной точки
+   \n\tв названии"
+                    "значение аргумента \033[1m--link:\033[0m
+   имя мне менее 4-х знаков и не более 25-ти,\n\t
+   допускается использование нижнего подчеркивания,
+   латинские и кириллические\n\t символы,
+   цифры от 0 до 9"
+                    "системная иконка или полный путь до
+   пользовательской \n\tспиок системных MIME-type
+   иконок можно посмотреть используя команду: \n\tls
+   /usr/share/icons/breeze/mimetypes/64 |
+   sed 's/\.[^.]*$//'"
+                    ''
+                    ''
+                    "Путь к файлу шаблона, путь к реальному
+   файлу\n\t соответствующий ограничениям файловой
+   системы GNU/Linux")
+required_OR_optional=(1
+                        1
+                        0
+                        0
+                        0
+                        1)
+main_OR_side=(1
+                1
+                1
+                0
+                0
+                1)
+for ix in ${!arr_var[*]}
+do
+    printf "%s = %s\n" "arr_var[$ix]" "${arr_var[$ix]}"
+done
+echo ""
+for ix in ${!long_key[*]}
+do
+    printf "%s = %s\n" "long_key[$ix]" "${long_key[$ix]}"
+done
+echo ""
+for ix in ${!short_key[*]}
+do
+    printf "%s = %s\n" "short_key[$ix]" "${short_key[$ix]}"
+done
+echo ""
+for ix in ${!regex_value[*]}
+do
+    printf "%s = %s\n" "regex_value[$ix]" "${regex_value[$ix]}"
+done
+echo ""
+for ix in ${!value_error_text[*]}
+do
+    printf "%s = %s\n" "value_error_text[$ix]" "${value_error_text[$ix]}"
+done
+echo ""
+for ix in ${!required_OR_optional[*]}
+do
+    printf "%s = %s\n" "required_OR_optional[$ix]" "${required_OR_optional[$ix]}"
+done
+echo ""
+for ix in ${!main_OR_side[*]}
+do
+    printf "%s = %s\n" "main_OR_side[$ix]" "${main_OR_side[$ix]}"
+done
 
 
 # Код скрипта
 # Функция main содержит основную логику скрипта
-main() {
-    #echo "Скрипт запущен."
-    # Добавьте ваш код здесь
-
-    flag_analiz $@
-
-}
-
-# Вызов функции main с передачей всех аргументов скрипта
-main $@
+# main() {
+#     #echo "Скрипт запущен."
+#     # Добавьте ваш код здесь
+#
+#     flag_analiz $@
+#
+# }
+#
+# # Вызов функции main с передачей всех аргументов скрипта
+# main $@
 
